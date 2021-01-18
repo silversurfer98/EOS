@@ -11,7 +11,7 @@ int main ()
 
     cout<<"enter pressure in kscg : ";
     cin>>p;
-    p=(p+1.0333)*98066.5;
+    p=(p-1.03323)*0.0980665;
 
     cout<<"enter critical temperature in Kelvin : ";
     cin>>tc;
@@ -34,18 +34,24 @@ int main ()
     float v;
     v = (r*t)/p;
 
-    int f=1, tolerance=0.0001;
+    int f=0,ii=0, tolerance=0.01;
     float vv;
 
-    while(f=!0)
+    while(f==0)
     {
+        
+        cout<<"the answer for "<<ii<<"th iteration is : "<<v<<endl;
         vv = b + ((r*t)/(p + ((a*aa)/((pow(v,2)) + (2*b*v) + (pow(b,2))))));
-        if((v-vv)==tolerance || (vv-v)==tolerance)
+        cout<<"diff :"<<abs(v-vv)<<endl;
+        if(abs(v-vv)<=tolerance)
         {
             f=1;
         }
+        ii=ii+1;
         v = vv;
     }
 
     return 0;
+    cout<<"the answer is : "<<v<<endl;
+    cout<<"Z = "<<((p*v)/(r*t))<<endl;
 }
